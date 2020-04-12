@@ -74,8 +74,20 @@ echo -e "UUID=${RAID_UUID}\t/workspace\text4\trw,relatime,defaults\t0\t1" >>/etc
 
 # Setup personal folder and chown it at /workspace
 for user in $(ls "$BASEDIR"/personal_setups); do
-        mkdir /workspace/"$user"
-        chown -R "$user":"$user" /workspace/"$user"
+       # Add changes to bashrc
+       echo "export USE_CCACHE=1" >> /home/"$user"/.bashrc
+       echo "export CCACHE_DIR=/workspace/$user/ccache" >> /home/"$user"/.bashrc
+       echo "export SKIP_ABI_CHECKS=true" >> /home/"$user"/.bashrc
+       echo "export TEMPORARY_DISABLE_PATH_RESTRICTIONS=true" >> /home/"$user"/.bashrc
+       echo "ccache -M 350G" >> /home/"$user"/.bashrc
+
+       # Make new folders
+       mkdir /workspace/"$user"
+       mkdir /workspace/"$user"/ccache
+
+       # Chown folders owner
+       chown -R "$user":"$user" /workspace/"$user"
+       chown -R "$user":"$user" /home/"$user"
 done
 
 # Setting up environment for Android building
