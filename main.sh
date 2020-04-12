@@ -7,18 +7,24 @@
 # The code is very dirty though
 # TO-DO: Need proper implementation in the futrue
 
+LSB_RELEASE="$(lsb_release -d | cut -d ':' -f 2 | sed -e 's/^[[:space:]]*//')"
 command -v apt > /dev/null
-if [[ $? != 1 ]]; then
-       # Install packages
-       sudo apt install byobu git zsh parted gnupg2 -y
+if [[ $? != 0 ]]; then
+       if [[ ${LSB_RELEASE} =~ "Ubuntu" || ${LSB_RELEASE} =~ "Debian GNU/Linux" || ${LSB_RELEASE} =~ "Deepin" ]]; then
+          # Install packages
+          sudo apt install byobu git zsh parted gnupg2 -y
+       else
+          echo "Not installing byobu git zsh parted gnupg2, please install it manually."
+          echo "This script is made for Debian/Ubuntu only, Aborting..."
+          exit 0
+       fi
 else
        echo "Not installing byobu git zsh parted gnupg2, please install it manually."
-       echo "This script is made for Debian/Ubuntu based distribution only, Aborting..."
+       echo "This script is made for Debian/Ubuntu only, Aborting..."
        exit 0
 fi
 
 # Add users, and copy public keys
-
 BASEDIR=$(dirname "$0")
 for user in $(ls "$BASEDIR"/personal_setups); do
        useradd -m "$user"
