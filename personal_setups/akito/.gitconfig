@@ -1,0 +1,12 @@
+[user]
+        name = Akito Mizukito
+        email = akito@evolution-x.org
+        signingkey = 807FDB3B90CFC49CEBA0EF758878FB67ABD9DC22
+[credential]
+        helper = store
+[commit]
+        gpgsign = true
+[gpg]
+        program = gpg2
+[core]
+        hooksPath = /home/akito/.git/hooks
