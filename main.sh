@@ -9,7 +9,7 @@
 
 LSB_RELEASE="$(lsb_release -d | cut -d ':' -f 2 | sed -e 's/^[[:space:]]*//')"
 command -v apt > /dev/null
-if [[ $? != 0 ]]; then
+if [[ $? != 1 ]]; then
        if [[ ${LSB_RELEASE} =~ "Ubuntu" || ${LSB_RELEASE} =~ "Debian GNU/Linux" || ${LSB_RELEASE} =~ "Deepin" ]]; then
           # Install packages
           sudo apt install byobu git zsh parted gnupg2 -y
