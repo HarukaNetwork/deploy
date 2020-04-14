@@ -107,4 +107,3 @@ cd ~/ || return
 
 # Cleanup
 rm -rf ~/.android-scripts
-rm -rf ~/deploy
