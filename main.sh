@@ -100,10 +100,10 @@ done
 
 git config --global user.email "akito@evolution-x.org"
 git config --global user.name "Akito Mizukito"
-git clone https://github.com/realakito/script ~/.setup_scripts
-cd ~/.setup_scripts || echo "Failed to cd to .setup_scripts . Are you sure git is installed?"; return
+git clone https://github.com/realakito/script .setup_scripts
+cd .setup_scripts || echo "Failed to cd to .setup_scripts . Are you sure git is installed?"; return
 bash setup/android_build_env.sh
-cd ~/ || return
+cd ../ || return
 
 # Cleanup
-rm -rf ~/.android-scripts
+rm -rf .android-scripts
